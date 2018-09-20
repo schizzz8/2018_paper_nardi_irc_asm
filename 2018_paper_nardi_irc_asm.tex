@@ -504,6 +504,58 @@ the three above mentioned sub-problems. This allows our system to be
 effectively deployed in different scenarios, making a step towards the
 next generation robotic applications.
 
+\subsection{Representation}
+
+A semantic map is a collection of elements
+
+\begin{equation}
+\cSM = \{ \bE_1 \dots \bE_N \},
+\end{equation}
+
+where each element $\bE_i = < \cG_i, \cS_i>$ represents an object in
+the scene and is characterized by geometric and semantic information.
+
+\subsubsection{Geometric Information $\cG$}
+
+The former describes the geometric properties of each element of the
+map. To fully qualify an element geometry we make us of:
+\begin{itemize}
+	\item {\bf Pose3D}: $\bX = [ \bR | \bt] \in SE(3)$, it's expressed
+    in a global reference system $\cR^G$ and defines the element
+    reference system $\cR^E$.
+	\item {\bf Size3D}: $\bS = <\bL ,\bU> \in \mathbf{R}^3 $, it's
+    represented by two 3D vectors that define the smallest
+    \emph{axis-aligned} bounding box that contains the whole element.
+	\item {\bf Representation3D}: $\bM$, a digital model of the element
+    surface (e.g. point cloud, mesh and so on).
+\end{itemize}
+
+\subsubsection{Semantic Information $\cS$}
+
+While, the latter describes the semantic information of each elements
+of the map through the following properties:
+\begin{itemize}
+	\item {\bf Type}: $t \in \cL$, the element category. It's selected
+    by the recognition module among the possible semantic labels $\cL
+    = \{l_1 \dots l_M \}$.
+	\item {\bf Properties:} $\bP = \{ p_1 \dots p_K \}$, other semantic
+    information related to the element, e.g. relationships with other
+    elements, physical properties, functionalities, and so on.
+\end{itemize}   
+
+\subsubsection{Semantic Mapping Process}
+
+To build such a representation, the semantic mapping process can be
+decomposed in three steps (see~\figref{fig:system}): \emph{1)
+  perception}, the output of visual and range sensors is processed to
+extract information for recovering the structure and objects/places
+categories of the scene; \emph{2) map management}, these information
+is used to update the current belief about the state of the
+environment; \emph{3) action}, next pose for the robot is computed in
+order to improve its representation of the environment. In the
+remainder, we will present a detailed description of each of these
+sub-problems along with our proposed implementation.
+
 
 \section{Conclusion}
 The conclusion goes here.
